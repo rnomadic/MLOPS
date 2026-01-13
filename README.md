@@ -63,14 +63,24 @@ The above will run pytest on entire folder.
 
 ---
 
-##  📈 
-We use Terraform to ensure environment parity across Staging and Production.
-- **State Management:** Remote state locking is implemented via Azure Blob Storage/S3 to prevent race conditions.
-- **Provisioned Resources:** Azure ML Workspace, AKS Clusters, and Key Vault for secret management.
+##  📈 Job 2: Build and Push Docker Image
+Builds a Docker image, tagging it with the commit SHA and the latest tag (only on pushes to main).<br>
+<img width="738" height="232" alt="image" src="https://github.com/user-attachments/assets/2e6cd063-d96e-4116-aa8d-b055cdbd2a52" />
+Please see the MLOPS\Dockerfile for more information.<br>
+📌 CI Workflow Context
+In CI-workflow.yml, the step that builds the image is:
+
+- name: Build and Push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .  # This is the build context (the root directory)
+          # ...
+
+
 
 ---
 
-## 📈 Experiment Tracking with MLflow
+## 🕵️ Job 3: Continuous Training (CT) - Train and Store New Model
 To ensure 100% reproducibility, we utilize the four pillars of MLflow:
 1. **Tracking:** Logs parameters, metrics, and code versions.
 2. **Projects:** Standardized packaging (Conda/Docker).
