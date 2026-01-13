@@ -19,9 +19,9 @@ MLOps introduces a "Third Pillar" to traditional CI/CD: **Continuous Training (C
 ---
 
 ## 🚀 The MLOps CI/CD is multi-trigger
-Code change: CI -> CT ->CD: 
-Data Change: CT -> CD: New data arrives (e.g., a nightly job aggregates new customer data).
-Model Degradation: CT -> CD: 
+Code change: CI -> CT ->CD: </br>
+Data Change: CT -> CD: New data arrives (e.g., a nightly job aggregates new customer data) </br>
+Model Degradation: CT -> CD: </br>
 
 
 ### CI – The Core Trigger Mechanism: The Git Webhook
