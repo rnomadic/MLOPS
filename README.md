@@ -90,13 +90,13 @@ Please see the continuous_training Job in the CI-workflow.yml file.
 This job will use a runner to pull the newly built Docker image, execute the training script inside the container, and handle the resulting model artifact.
 
 docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
-** Run the training script inside the container **
+#### Run the training script inside the container **
           
-# The -v mounts the 'artifacts' directory for the model to be saved locally
-docker run --rm \
-   -v ${PWD}/artifacts:/app/artifacts \
-   ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest \
-   python src/train.py --output-path /app/artifacts/new_model.pkl
+#### The -v mounts the 'artifacts' directory for the model to be saved locally
+  docker run --rm \
+     -v ${PWD}/artifacts:/app/artifacts \
+     ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest \
+     python src/train.py --output-path /app/artifacts/new_model.pkl
 
 
 ## 🕵️ Case Study: Real-Time Fraud Detection
