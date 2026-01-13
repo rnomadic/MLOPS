@@ -78,17 +78,26 @@ In CI-workflow.yml, the step that builds the image is:<br>
           # ... <br>
 
 
+• The line context: . means the Docker daemon looks in the current directory (the repository root) for the build context. <br>
+• By default, the docker build command looks for a file named Dockerfile within that context. <br>
+You should place the file directly in the main directory: <br>
+Deployment Readiness: Pushes the tested and built image to the GitHub Container Registry (ghcr.io), making it ready for deployment to a service like Kubernetes, Google Cloud Run, or AWS ECS.  <br>
 
 ---
 
 ## 🕵️ Job 3: Continuous Training (CT) - Train and Store New Model
-To ensure 100% reproducibility, we utilize the four pillars of MLflow:
-1. **Tracking:** Logs parameters, metrics, and code versions.
-2. **Projects:** Standardized packaging (Conda/Docker).
-3. **Models:** Unified format for various downstream tools.
-4. **Registry:** Centralized hub for model versioning and stage transitions (Staging -> Production).
+Please see the continuous_training Job in the CI-workflow.yml file.
+This job will use a runner to pull the newly built Docker image, execute the training script inside the container, and handle the resulting model artifact.
 
----
+docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+** Run the training script inside the container **
+          
+# The -v mounts the 'artifacts' directory for the model to be saved locally
+docker run --rm \
+   -v ${PWD}/artifacts:/app/artifacts \
+   ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest \
+   python src/train.py --output-path /app/artifacts/new_model.pkl
+
 
 ## 🕵️ Case Study: Real-Time Fraud Detection
 The system is designed for sub-100ms latency using a microservices architecture.
