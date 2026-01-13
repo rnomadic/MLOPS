@@ -135,6 +135,19 @@ o	AWS_MODEL_BUCKET: The S3 bucket name used for storing the model artifact. <br>
 o	A running SageMaker Endpoint named fraud-detection-endpoint (or whatever you set for SAGEMAKER_ENDPOINT_NAME). If the endpoint doesn't exist, the update-endpoint command will fail, and you would need an initial create-endpoint step. <br>
 This workflow executes the standard SageMaker deployment pattern: Create Model → Create Endpoint Configuration → Update Endpoint (which performs the actual deployment). <br>
 
+💻 How can you test the code quality?
+In you file MLOPS\CI-workflow-sagemaker.yml you could see the below code block
+- name: Run Linting (Code Quality)
+  run: |
+    pip install flake8
+    flake8 . --count --exit-zero --max-complexity=10 --max-line-length=120 --statistics
+
+flake8 is a popular tool that checks your code against PEP 8 (the official Python style guide) and searches for common programming errors like unused variables or undefined names.
+• --count: Prints the total number of errors found at the end of the report.
+• --exit-zero: This is a critical flag for CI. It forces the command to return a "success" status even if errors are found. This means the workflow will not stop even if there are linting issues.
+• --max-complexity=10: Checks the "Cyclomatic Complexity" of your functions. If a function has too many if/else statements or loops (making it hard to read and test), it will flag it.
+• --max-line-length=120: Sets the limit for how long a single line of code can be. The default is 79, but many teams extend this to 120 for modern wide-screen monitors.
+• --statistics: Provides a summary count of each type of error found (e.g., "5 instances of trailing whitespace").
 
 
 
