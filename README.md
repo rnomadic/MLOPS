@@ -1,5 +1,5 @@
 # This Repo Is all about MLOPS Engineering
-<code style="color : name_color">text</code>
+>
 
 ## 1. What are the differences between CI/CD for traditional software versus CI/CD for an ML model?
 ### The MLOps CI/CD is multi-trigger
@@ -14,3 +14,31 @@ When a developer (or data scientist) pushes new code to the central repository (
 3.	The Activation: The orchestrator receives the signal and initiates the first stage of the pipeline (Continuous Integration).
 
 
+### Implementation using GitHub action:
+
+### Please check MLOPS\CI-workflow.yml.
+
+This CI workflow is now ready to be saved inside the. github/workflows/ directory of your GitHub repository. 
+
+### Trigger Events
+### This workflow runs when a change is pushed to 'main' or a pull request is opened against 'main'.
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+
+🚀 CI/CD for Machine Learning
+Unlike traditional DevOps, MLOps includes a "Third Pillar": Continuous Training (CT).
+
+
+Multi-Trigger Pipelines
+
+Code Changes: Standard CI/CD for application logic.
+
+
+Data Changes: Triggered when new training datasets arrive.
+
+
+Model Degradation: Triggered via monitoring when performance drops below a threshold.
