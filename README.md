@@ -65,16 +65,17 @@ The above will run pytest on entire folder.
 
 ##  📈 Job 2: Build and Push Docker Image
 Builds a Docker image, tagging it with the commit SHA and the latest tag (only on pushes to main).<br>
-<img width="738" height="232" alt="image" src="https://github.com/user-attachments/assets/2e6cd063-d96e-4116-aa8d-b055cdbd2a52" />
-Please see the MLOPS\Dockerfile for more information.<br>
-📌 CI Workflow Context
-In CI-workflow.yml, the step that builds the image is:
+<img width="738" height="232" alt="image" src="https://github.com/user-attachments/assets/2e6cd063-d96e-4116-aa8d-b055cdbd2a52" /> <br>
 
-- name: Build and Push Docker image
-        uses: docker/build-push-action@v5
-        with:
-          context: .  # This is the build context (the root directory)
-          # ...
+Please see the MLOPS\Dockerfile for more information.<br>
+📌 CI Workflow Context <br>
+In CI-workflow.yml, the step that builds the image is:<br>
+
+- name: Build and Push Docker image <br>
+        uses: docker/build-push-action@v5 <br>
+        with:<br>
+          context: .  # This is the build context (the root directory) <br>
+          # ... <br>
 
 
 
